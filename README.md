@@ -12,6 +12,10 @@ A modern, full-stack blogging application built with React, Appwrite, and Redux 
 *   **State Management**: Centralized state management using Redux Toolkit.
 *   **Real-time Validation**: Form validation for better user experience using React Hook Form.
 
+## 📸 Screenshots
+
+![App Screenshot](screenshots/screenshot.png)
+
 ## 🛠️ Technology Stack
 
 *   **Frontend Library**: [React](https://react.dev/)
