@@ -141,6 +141,10 @@ To create a production-ready build:
     npm run preview
     ```
 
+## 🚀 Deployment
+
+Access the live application here: [MegaBlogger Live Demo](https://mega-blogger-giwhu3cf3-avkhalkars-projects.vercel.app/)
+
 ## 📁 Project Structure
 
 ```
