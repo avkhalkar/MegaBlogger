@@ -27,15 +27,15 @@ function Login() {
     }
 
     return (
-        <div className='flex items-center justify-center w-full min-h-[80vh]'>
-            <div className={`mx-auto w-full max-w-lg glass-panel bg-white/80 rounded-xl p-10 border border-gray-100 shadow-xl`}>
+        <div className='flex items-center justify-center w-full min-h-[70vh] sm:min-h-[80vh] px-4'>
+            <div className={`mx-auto w-full max-w-lg glass-panel bg-white/80 rounded-xl p-5 sm:p-10 border border-gray-100 shadow-xl`}>
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
                         <Logo width="100%" />
                     </span>
                 </div>
-                <h2 className="text-center text-2xl font-bold leading-tight text-slate-800 mb-4">Sign in to your account</h2>
-                <p className="mt-2 text-center text-base text-slate-500 mb-8">
+                <h2 className="text-center text-xl sm:text-2xl font-bold leading-tight text-slate-800 mb-3 sm:mb-4">Sign in to your account</h2>
+                <p className="mt-2 text-center text-sm sm:text-base text-slate-500 mb-6 sm:mb-8">
                     Don&apos;t have any account?&nbsp;
                     <Link
                         to="/signup"

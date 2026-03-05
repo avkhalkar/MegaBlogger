@@ -38,9 +38,9 @@ export default function Post() {
     };
 
     return post ? (
-        <div className="py-8">
+        <div className="py-4 sm:py-8">
             <Container>
-                <div className='w-full mb-6 glass-panel p-4 rounded-xl relative'>
+                <div className='w-full mb-4 sm:mb-6 glass-panel p-2 sm:p-4 rounded-xl relative'>
                     <div className="w-full flex justify-center overflow-hidden rounded-xl aspect-video relative">
                         <img
                             src={appwriteService.getFileView(post.featuredImage)}
@@ -48,13 +48,13 @@ export default function Post() {
                             className="w-full h-full object-cover object-center"
                         />
                         {isAuthor && (
-                            <div className="absolute right-4 top-4 flex space-x-2">
+                            <div className="absolute right-2 sm:right-4 top-2 sm:top-4 flex space-x-2">
                                 <Link to={`/edit-post/${post.$id}`}>
-                                    <Button bgColor="bg-green-500" className="hover:bg-green-600 transition-colors shadow-lg">
+                                    <Button bgColor="bg-green-500" className="hover:bg-green-600 transition-colors shadow-lg text-sm sm:text-base px-3 sm:px-6 py-1.5 sm:py-2.5">
                                         Edit
                                     </Button>
                                 </Link>
-                                <Button bgColor="bg-red-500" className="hover:bg-red-600 transition-colors shadow-lg" onClick={deletePost}>
+                                <Button bgColor="bg-red-500" className="hover:bg-red-600 transition-colors shadow-lg text-sm sm:text-base px-3 sm:px-6 py-1.5 sm:py-2.5" onClick={deletePost}>
                                     Delete
                                 </Button>
                             </div>
@@ -62,9 +62,9 @@ export default function Post() {
                     </div>
                 </div>
 
-                <div className="w-full mb-6 glass-panel bg-white/80 p-8 rounded-xl border border-gray-100/50 shadow-md">
-                    <h1 className="text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-6">{post.title}</h1>
-                    <div className="browser-css text-slate-700 leading-relaxed text-lg">
+                <div className="w-full mb-4 sm:mb-6 glass-panel bg-white/80 p-4 sm:p-8 rounded-xl border border-gray-100/50 shadow-md">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4 sm:mb-6">{post.title}</h1>
+                    <div className="prose-content text-slate-700 text-base sm:text-lg">
                         {parse(post.content)}
                     </div>
                 </div>

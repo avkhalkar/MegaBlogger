@@ -89,8 +89,8 @@ export default function PostForm({ post }) {
                     <Error message={error} onRetry={() => setError("")} />
                 </div>
             )}
-            <form onSubmit={handleSubmit(submit)} className="flex flex-wrap glass-panel bg-white/50 p-8 rounded-xl border border-gray-100/50">
-                <div className="w-full md:w-2/3 px-2 mb-6 md:mb-0">
+            <form onSubmit={handleSubmit(submit)} className="flex flex-wrap glass-panel bg-white/50 p-4 sm:p-8 rounded-xl border border-gray-100/50">
+                <div className="w-full md:w-2/3 px-2 mb-6">
                     <Input
                         label="Title :"
                         placeholder="Title"
@@ -161,7 +161,7 @@ export default function PostForm({ post }) {
                         className="mb-4"
                         {...register("status", { required: true })}
                     />
-                    <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg shadow-blue-500/30">
+                    <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg shadow-blue-500/30 mt-4">
                         {post ? "Update" : "Submit"}
                     </Button>
                 </div>

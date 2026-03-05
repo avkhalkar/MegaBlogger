@@ -21,11 +21,11 @@ function AllPosts() {
 
     if (loading) {
         return (
-            <div className="w-full py-8 mt-4 text-center">
+            <div className="w-full py-6 sm:py-8 mt-4 text-center">
                 <Container>
-                    <div className="flex flex-col items-center justify-center min-h-[50vh]">
-                        <div className="loader mb-4 border-t-blue-500"></div>
-                        <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 animate-pulse">
+                    <div className="flex flex-col items-center justify-center min-h-[40vh] sm:min-h-[50vh]">
+                        <div className="loader mb-4"></div>
+                        <h1 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 animate-pulse">
                             Loading posts...
                         </h1>
                     </div>
@@ -36,14 +36,14 @@ function AllPosts() {
 
     if (visiblePosts.length === 0) {
         return (
-            <div className="w-full py-8 mt-4 text-center">
+            <div className="w-full py-6 sm:py-8 mt-4 text-center px-4">
                 <Container>
-                    <div className="flex flex-col items-center justify-center min-h-[50vh] glass-panel bg-white/80 rounded-xl p-8 max-w-2xl mx-auto border border-gray-100 shadow-lg">
-                        <div className="text-6xl mb-4">📭</div>
-                        <h1 className="text-3xl font-bold text-slate-800 mb-2">
+                    <div className="flex flex-col items-center justify-center min-h-[40vh] sm:min-h-[50vh] glass-panel bg-white/80 rounded-xl p-5 sm:p-8 max-w-2xl mx-auto border border-gray-100 shadow-lg">
+                        <div className="text-5xl sm:text-6xl mb-4">📭</div>
+                        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">
                             No posts found
                         </h1>
-                        <p className="text-slate-500">
+                        <p className="text-slate-500 text-sm sm:text-base">
                             Create a post to see it here!
                         </p>
                     </div>
@@ -53,9 +53,10 @@ function AllPosts() {
     }
 
     return (
-        <div className='w-full py-8'>
+        <div className='w-full py-6 sm:py-8'>
             <Container>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+                <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-6 sm:mb-8">All Posts</h1>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6'>
                     {visiblePosts.map((post, index) => (
                         <div
                             key={post.$id}

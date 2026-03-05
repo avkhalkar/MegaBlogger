@@ -8,21 +8,21 @@ export default function Protected({ children, authentication = true }) {
     const [loader, setLoader] = useState(true)
     const authStatus = useSelector(state => state.auth.status)
 
-    // useEffect depends on authStatus, navigate and authentication
-    // navigate rarely changes
-
     useEffect(() => {
-
-        // If the user is not authenticated and the route requires authentication, redirect to login
         if (authentication && authStatus !== authentication) {
             navigate("/login")
-
-            // If route requires authentocation and the user is logged in, redirect to home page
         } else if (!authentication && authStatus !== authentication) {
             navigate("/")
         }
         setLoader(false)
     }, [authStatus, navigate, authentication])
 
-    return loader ? <h1>Loading...</h1> : <>{children}</>
+    return loader ? (
+        <div className="flex items-center justify-center min-h-[50vh]">
+            <div className="flex flex-col items-center">
+                <div className="loader mb-4"></div>
+                <p className="text-slate-500 animate-pulse">Loading...</p>
+            </div>
+        </div>
+    ) : <>{children}</>
 }
