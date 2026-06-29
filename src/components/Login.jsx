@@ -107,6 +107,11 @@ function Login() {
                                 <PasswordToggle show={showPassword} onToggle={() => setShowPassword(p => !p)} />
                             </div>
                             {errors.password && <p className="text-red-500 text-sm">Password is required</p>}
+                            <div className="flex justify-end">
+                                <Link to="/forgot-password" className="text-xs text-blue-600 hover:underline font-medium">
+                                    Forgot password?
+                                </Link>
+                            </div>
                         </div>
                         <Button
                             type="submit"

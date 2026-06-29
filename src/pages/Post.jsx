@@ -6,9 +6,18 @@ import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import { getReadingTime } from "../utils/readingTime";
 
+const PARAGRAPHS_PER_STEP = 3;
+
+function splitIntoParagraphs(html) {
+    const matches = html.match(/<p[\s\S]*?<\/p>/gi);
+    if (!matches || matches.length === 0) return [html];
+    return matches;
+}
+
 export default function Post() {
     const [post, setPost] = useState(null);
     const [notFound, setNotFound] = useState(false);
+    const [visibleCount, setVisibleCount] = useState(PARAGRAPHS_PER_STEP);
     const { slug } = useParams();
     const navigate = useNavigate();
 
@@ -99,7 +108,38 @@ export default function Post() {
                         </span>
                     </div>
                     <div className="prose-content text-slate-700 text-base sm:text-lg">
-                        {parse(post.content)}
+                        {(() => {
+                            const paragraphs = splitIntoParagraphs(post.content)
+                            const visible = paragraphs.slice(0, visibleCount)
+                            const hasMore = visibleCount < paragraphs.length
+                            return (
+                                <>
+                                    {visible.map((p, i) => (
+                                        <div key={i} className="animate-slide-up">
+                                            {parse(p)}
+                                        </div>
+                                    ))}
+                                    <div className="mt-6 flex gap-3 flex-wrap">
+                                        {visibleCount > PARAGRAPHS_PER_STEP && (
+                                            <button
+                                                onClick={() => { setVisibleCount(PARAGRAPHS_PER_STEP); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+                                                className="px-6 py-2 rounded-full border border-slate-200 text-slate-500 text-sm font-medium hover:bg-slate-50 transition-colors"
+                                            >
+                                                Show less ↑
+                                            </button>
+                                        )}
+                                        {hasMore && (
+                                            <button
+                                                onClick={() => setVisibleCount((c) => c + PARAGRAPHS_PER_STEP)}
+                                                className="px-6 py-2 rounded-full border border-blue-200 text-blue-600 text-sm font-medium hover:bg-blue-50 transition-colors"
+                                            >
+                                                Show more ↓
+                                            </button>
+                                        )}
+                                    </div>
+                                </>
+                            )
+                        })()}
                     </div>
                 </div>
             </Container>

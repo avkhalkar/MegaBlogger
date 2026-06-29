@@ -9,6 +9,23 @@ import { parseError } from "../../utils/parseError";
 export default function PostForm({ post }) {
     const [error, setError] = React.useState("");
     const [submitting, setSubmitting] = React.useState(false);
+    const userData = useSelector((state) => state.auth.userData);
+
+    if (!userData?.emailVerification) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-[40vh] glass-panel bg-white/80 rounded-xl p-8 max-w-lg mx-auto border border-gray-100 shadow-lg text-center">
+                <div className="text-5xl mb-4">📬</div>
+                <h2 className="text-xl font-bold text-slate-800 mb-2">Verify your email first</h2>
+                <p className="text-slate-500 text-sm mb-6">
+                    You need to verify your email address before you can create or edit posts.
+                </p>
+                <a href="/check-email" className="text-blue-600 hover:underline text-sm font-medium">
+                    Go to verification page →
+                </a>
+            </div>
+        )
+    }
+
     const { register, handleSubmit, watch, setValue, control, getValues, formState: { errors } } = useForm({
         defaultValues: {
             title: post?.title || "",
@@ -19,7 +36,6 @@ export default function PostForm({ post }) {
     });
 
     const navigate = useNavigate();
-    const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
         setError("");

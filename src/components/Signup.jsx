@@ -63,7 +63,8 @@ function Signup() {
             if (session) {
                 const currentUser = await authService.getCurrentUser()
                 if (currentUser) dispatch(login({ userData: currentUser }))
-                navigate("/")
+                await authService.sendVerification()
+                navigate('/check-email')
             }
         } catch (error) {
             setError(parseError(error))

@@ -15,7 +15,12 @@ import EditPost from "./pages/EditPost";
 import Post from "./pages/Post";
 import AllPosts from "./pages/AllPosts";
 import NotFound from "./pages/NotFound";
-import AuthorPosts from "./pages/AuthorPosts";
+import AuthorPosts from "./pages/AuthorPosts"
+import VerifyEmail from "./pages/VerifyEmail"
+import CheckEmail from "./pages/CheckEmail"
+import ForgotPassword from "./pages/ForgotPassword"
+import ResetPassword from "./pages/ResetPassword"
+import { ToastProvider } from "./utils/ToastContext";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +84,22 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/verify-email",
+        element: <VerifyEmail />,
+      },
+      {
+        path: "/check-email",
+        element: <CheckEmail />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPassword />,
+      },
+      {
         path: "*",
         element: <NotFound />,
       },
@@ -90,7 +111,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ToastProvider>
+        <RouterProvider router={router} />
+      </ToastProvider>
     </Provider>
 
   </React.StrictMode>,
