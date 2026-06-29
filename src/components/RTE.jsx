@@ -3,6 +3,26 @@ import { Editor } from '@tinymce/tinymce-react';
 import { Controller } from 'react-hook-form';
 import conf from '../conf/conf';
 
+const EDITOR_INIT = {
+  height: 500,
+  menubar: true,
+  plugins: [
+    "image", "advlist", "autolink", "lists", "link", "charmap", "preview",
+    "anchor", "searchreplace", "visualblocks", "code", "fullscreen",
+    "insertdatetime", "media", "table", "help", "wordcount",
+  ],
+  toolbar:
+    "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help",
+  content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+}
+
+// Never re-renders after mount so TinyMCE cursor position is never reset
+const StableEditor = React.memo(
+  ({ apiKey, init, initialValue, onChange }) => (
+    <Editor apiKey={apiKey} init={init} initialValue={initialValue} onEditorChange={onChange} />
+  ),
+  () => true
+)
 
 export default function RTE({ name, control, label, defaultValue = "", rules }) {
   return (
@@ -14,41 +34,14 @@ export default function RTE({ name, control, label, defaultValue = "", rules }) 
         control={control}
         rules={rules}
         render={({ field: { onChange } }) => (
-          <Editor
+          <StableEditor
             apiKey={conf.tinyMCEApiKey}
+            init={EDITOR_INIT}
             initialValue={defaultValue}
-            init={{
-              initialValue: defaultValue,
-              height: 500,
-              menubar: true,
-              plugins: [
-                "image",
-                "advlist",
-                "autolink",
-                "lists",
-                "link",
-                "charmap",
-                "preview",
-                "anchor",
-                "searchreplace",
-                "visualblocks",
-                "code",
-                "fullscreen",
-                "insertdatetime",
-                "media",
-                "table",
-                "help",
-                "wordcount",
-              ],
-              toolbar:
-                "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
-              content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
-            }}
-            onEditorChange={onChange}
+            onChange={onChange}
           />
         )}
       />
-
     </div>
   )
 }
