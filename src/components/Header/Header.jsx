@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, forwardRef } from 'react'
 import { Container, Logo, LogoutBtn } from '../index'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-function Header() {
+const Header = forwardRef(function Header(props, ref) {
   const authStatus = useSelector((state) => state.auth.status)
   const navigate = useNavigate()
   const location = useLocation()
@@ -46,7 +46,7 @@ function Header() {
   }
 
   return (
-    <header className='py-3 sm:py-4 shadow-sm sticky top-0 z-50 glass-panel border-b border-gray-200'>
+    <header ref={ref} className='py-3 sm:py-4 shadow-sm fixed top-0 left-0 right-0 z-50 glass-panel border-b border-gray-200'>
       <Container>
         <nav className='flex items-center justify-between'>
           <div className='mr-4'>
@@ -117,6 +117,6 @@ function Header() {
       </Container>
     </header>
   )
-}
+})
 
 export default Header

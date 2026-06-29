@@ -61,7 +61,7 @@ function Home() {
         return (
             <div className="w-full py-6 sm:py-8 mt-4 text-center px-4">
                 <Container>
-                    <div className="flex flex-col items-center justify-center min-h-[40vh] sm:min-h-[50vh] glass-panel bg-white/80 rounded-xl p-5 sm:p-8 max-w-2xl mx-auto border border-gray-100 shadow-lg">
+                    <div className="flex flex-col items-center justify-center min-h-[40vh] sm:min-h-[50vh] glass-panel bg-white rounded-xl p-5 sm:p-8 max-w-2xl mx-auto border border-gray-100 shadow-lg">
                         <div className="text-5xl sm:text-6xl mb-4">🔒</div>
                         <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">
                             Please login to view your posts
@@ -126,7 +126,7 @@ function Home() {
                 </div>
 
                 {posts.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center min-h-[30vh] glass-panel bg-white/80 rounded-xl p-5 sm:p-8 max-w-2xl mx-auto border border-gray-100 shadow-lg text-center">
+                    <div className="flex flex-col items-center justify-center min-h-[30vh] glass-panel bg-white rounded-xl p-5 sm:p-8 max-w-2xl mx-auto border border-gray-100 shadow-lg text-center">
                         <div className="text-5xl sm:text-6xl mb-4">{activeTab === 'published' ? '📝' : '🗒️'}</div>
                         <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">
                             {activeTab === 'published' ? 'No published posts yet' : 'No drafts yet'}

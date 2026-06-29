@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import './App.css'
 import authService from "./appwrite/auth"
@@ -8,6 +8,8 @@ import { Outlet } from 'react-router-dom'
 
 function App() {
   const [loading, setLoading] = useState(true)
+  const [headerHeight, setHeaderHeight] = useState(64)
+  const headerRef = useRef(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -22,10 +24,20 @@ function App() {
       .finally(() => setLoading(false))
   }, [])
 
+  useEffect(() => {
+    if (!headerRef.current) return
+    const observer = new ResizeObserver(() => {
+      setHeaderHeight(headerRef.current.offsetHeight)
+    })
+    observer.observe(headerRef.current)
+    setHeaderHeight(headerRef.current.offsetHeight)
+    return () => observer.disconnect()
+  }, [loading])
+
   return !loading ? (
     <div className='min-h-screen flex flex-col'>
-      <Header />
-      <main className='flex-grow'>
+      <Header ref={headerRef} />
+      <main className='flex-grow' style={{ paddingTop: headerHeight }}>
         <Outlet />
       </main>
       <Footer />

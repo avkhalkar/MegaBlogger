@@ -13,7 +13,7 @@ export default function PostForm({ post }) {
 
     if (!userData?.emailVerification) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-[40vh] glass-panel bg-white/80 rounded-xl p-8 max-w-lg mx-auto border border-gray-100 shadow-lg text-center">
+            <div className="flex flex-col items-center justify-center min-h-[40vh] glass-panel bg-white rounded-xl p-8 max-w-lg mx-auto border border-gray-100 shadow-lg text-center">
                 <div className="text-5xl mb-4">📬</div>
                 <h2 className="text-xl font-bold text-slate-800 mb-2">Verify your email first</h2>
                 <p className="text-slate-500 text-sm mb-6">

@@ -36,7 +36,7 @@ function VerifyEmail() {
 
     return (
         <div className="flex items-center justify-center w-full min-h-[70vh] px-4">
-            <div className="mx-auto w-full max-w-md glass-panel bg-white/80 rounded-xl p-8 border border-gray-100 shadow-xl text-center">
+            <div className="mx-auto w-full max-w-md glass-panel bg-white rounded-xl p-8 border border-gray-100 shadow-xl text-center">
                 {status === 'verifying' && (
                     <>
                         <div className="loader mx-auto mb-4"></div>

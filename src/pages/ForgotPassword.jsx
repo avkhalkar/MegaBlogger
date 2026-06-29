@@ -29,7 +29,7 @@ function ForgotPassword() {
     if (submitted) {
         return (
             <div className="flex items-center justify-center w-full min-h-[70vh] sm:min-h-[80vh] px-4">
-                <div className="mx-auto w-full max-w-lg glass-panel bg-white/80 rounded-xl p-5 sm:p-10 border border-gray-100 shadow-xl text-center">
+                <div className="mx-auto w-full max-w-lg glass-panel bg-white rounded-xl p-5 sm:p-10 border border-gray-100 shadow-xl text-center">
                     <div className="text-6xl mb-4">📩</div>
                     <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">Check your email</h2>
                     <p className="text-slate-500 text-sm sm:text-base mb-6">
@@ -45,7 +45,7 @@ function ForgotPassword() {
 
     return (
         <div className="flex items-center justify-center w-full min-h-[70vh] sm:min-h-[80vh] px-4">
-            <div className="mx-auto w-full max-w-lg glass-panel bg-white/80 rounded-xl p-5 sm:p-10 border border-gray-100 shadow-xl">
+            <div className="mx-auto w-full max-w-lg glass-panel bg-white rounded-xl p-5 sm:p-10 border border-gray-100 shadow-xl">
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
                         <Logo width="100%" />

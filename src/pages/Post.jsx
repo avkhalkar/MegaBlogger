@@ -46,7 +46,7 @@ export default function Post() {
         return (
             <div className="py-8">
                 <Container>
-                    <div className="flex flex-col items-center justify-center min-h-[50vh] glass-panel bg-white/80 rounded-xl p-8 max-w-2xl mx-auto border border-gray-100 shadow-lg text-center">
+                    <div className="flex flex-col items-center justify-center min-h-[50vh] glass-panel bg-white rounded-xl p-8 max-w-2xl mx-auto border border-gray-100 shadow-lg text-center">
                         <div className="text-6xl mb-4">🔍</div>
                         <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">Post Not Found</h1>
                         <p className="text-slate-500 mb-6">This post doesn't exist or may have been removed.</p>
@@ -97,7 +97,7 @@ export default function Post() {
                     </div>
                 </div>
 
-                <div className="w-full mb-4 sm:mb-6 glass-panel bg-white/80 p-4 sm:p-8 rounded-xl border border-gray-100/50 shadow-md">
+                <div className="w-full mb-4 sm:mb-6 glass-panel bg-white p-4 sm:p-8 rounded-xl border border-gray-100/50 shadow-md">
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">{post.title}</h1>
                     <div className="flex flex-wrap items-center gap-3 mb-4 sm:mb-6">
                         <p className="text-sm text-slate-500">
