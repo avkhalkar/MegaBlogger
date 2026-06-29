@@ -53,6 +53,32 @@ export class AuthService {
         }
     }
 
+    async loginWithGoogle() {
+        try {
+            this.account.createOAuth2Session(
+                'google',
+                `${window.location.origin}/`,
+                `${window.location.origin}/login`
+            )
+        } catch (error) {
+            console.error("Appwrite service :: loginWithGoogle :: error", error);
+            throw error;
+        }
+    }
+
+    async loginWithGitHub() {
+        try {
+            this.account.createOAuth2Session(
+                'github',
+                `${window.location.origin}/`,
+                `${window.location.origin}/login`
+            )
+        } catch (error) {
+            console.error("Appwrite service :: loginWithGitHub :: error", error);
+            throw error;
+        }
+    }
+
     async sendPasswordRecovery(email) {
         try {
             return await this.account.createRecovery(email, `${window.location.origin}/reset-password`);
