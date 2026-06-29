@@ -32,3 +32,8 @@ dist-ssr
 
 # Test
 /test
+
+# Claude Code (editor-specific, not needed by other devs)
+.claude/
+/handoff_context.md
+/tmp

@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import { Container, Logo, LogoutBtn } from '../index'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status)
   const navigate = useNavigate()
+  const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const isActive = (slug) => slug === '/' ? location.pathname === '/' : location.pathname.startsWith(slug)
 
   const navItems = [
     {
@@ -62,7 +65,7 @@ function Header() {
                 <li key={item.name}>
                   <button
                     onClick={() => navigate(item.slug)}
-                    className='inline-block px-4 py-2 duration-300 rounded-full text-slate-700 hover:bg-gray-100 hover:text-blue-600 hover:scale-105 transition-all text-sm lg:text-base font-medium'
+                    className={`inline-block px-4 py-2 duration-300 rounded-full transition-all text-sm lg:text-base font-medium ${isActive(item.slug) ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-slate-700 hover:bg-gray-100 hover:text-blue-600 hover:scale-105'}`}
                   >
                     {item.name}
                   </button>
@@ -97,7 +100,7 @@ function Header() {
                 <li key={item.name}>
                   <button
                     onClick={() => handleNavClick(item.slug)}
-                    className='w-full text-left px-4 py-3 rounded-lg text-slate-700 hover:bg-gray-100 hover:text-blue-600 transition-all text-base font-medium'
+                    className={`w-full text-left px-4 py-3 rounded-lg transition-all text-base font-medium ${isActive(item.slug) ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-slate-700 hover:bg-gray-100 hover:text-blue-600'}`}
                   >
                     {item.name}
                   </button>

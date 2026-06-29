@@ -4,9 +4,11 @@ import { Button, Input, RTE, Select, Error } from "..";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { parseError } from "../../utils/parseError";
 
 export default function PostForm({ post }) {
     const [error, setError] = React.useState("");
+    const [submitting, setSubmitting] = React.useState(false);
     const { register, handleSubmit, watch, setValue, control, getValues, formState: { errors } } = useForm({
         defaultValues: {
             title: post?.title || "",
@@ -21,43 +23,31 @@ export default function PostForm({ post }) {
 
     const submit = async (data) => {
         setError("");
+        setSubmitting(true);
         try {
             if (post) {
                 const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
-
-                if (file) {
-                    appwriteService.deleteFile(post.featuredImage);
-                }
+                if (file) appwriteService.deleteFile(post.featuredImage);
 
                 const dbPost = await appwriteService.updatePost(post.$id, {
                     ...data,
                     featuredImage: file ? file.$id : undefined,
                 });
-
-                if (dbPost) {
-                    navigate(`/post/${dbPost.$id}`);
-                } else {
-                    setError("Failed to update post. Please try again.");
-                }
+                navigate(`/post/${dbPost.$id}`);
             } else {
                 const file = await appwriteService.uploadFile(data.image[0]);
-
-                if (file) {
-                    const fileId = file.$id;
-                    data.featuredImage = fileId;
-                    const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
-
-                    if (dbPost) {
-                        navigate(`/post/${dbPost.$id}`);
-                    } else {
-                        setError("Failed to create post. Please try again.");
-                    }
-                } else {
-                    setError("Failed to upload image. Please try again.");
-                }
+                const dbPost = await appwriteService.createPost({
+                    ...data,
+                    featuredImage: file.$id,
+                    userId: userData.$id,
+                    authorName: userData.name,
+                });
+                navigate(`/post/${dbPost.$id}`);
             }
         } catch (error) {
-            setError(error.message || "An unexpected error occurred.");
+            setError(parseError(error));
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -139,15 +129,25 @@ export default function PostForm({ post }) {
                                         return "Only .jpg, .jpeg, .png and .gif files are accepted";
                                     }
                                     return true;
+                                },
+                                fileSize: (value) => {
+                                    if (!value || value.length === 0) return true;
+                                    const file = value[0];
+                                    if (file.size > 5 * 1024 * 1024) {
+                                        return "Image must be smaller than 5MB";
+                                    }
+                                    return true;
                                 }
                             }
                         })}
                     />
                     {errors.image?.type === "required" && <p className="text-red-500 text-sm mb-4">Featured Image is required</p>}
                     {errors.image?.type === "fileType" && <p className="text-red-500 text-sm mb-4">{errors.image.message}</p>}
+                    {errors.image?.type === "fileSize" && <p className="text-red-500 text-sm mb-4">{errors.image.message}</p>}
 
                     {post && (
                         <div className="w-full mb-4">
+                            <p className="text-xs text-slate-500 mb-2">Current image — leave file input empty to keep it</p>
                             <img
                                 src={appwriteService.getFileView(post.featuredImage)}
                                 alt={post.title}
@@ -161,8 +161,16 @@ export default function PostForm({ post }) {
                         className="mb-4"
                         {...register("status", { required: true })}
                     />
-                    <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg shadow-blue-500/30 mt-4">
-                        {post ? "Update" : "Submit"}
+                    <Button
+                        type="submit"
+                        disabled={submitting}
+                        bgColor={post ? "bg-green-500" : undefined}
+                        className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg shadow-blue-500/30 mt-4 ${submitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    >
+                        {submitting
+                            ? (post ? "⏳ Saving your changes..." : "⏳ Publishing your post...")
+                            : (post ? "Update" : "Submit")
+                        }
                     </Button>
                 </div>
             </form>
