@@ -223,6 +223,28 @@ GitHub OAuth Apps are tied to a single homepage URL, so you need a separate app 
 3.  Set **Authorization callback URL** to the one shown in Appwrite under **Auth** → **Settings** → **GitHub**.
 4.  Copy the new **Client ID** and **Client Secret** into Appwrite, replacing the dev ones.
 
+## 🏗️ Architecture Overview
+
+MegaBlog is a React SPA with no custom backend. The browser talks directly to Appwrite Cloud for all data and auth needs.
+
+```
+┌─────────────────────────────────────┐
+│           Browser (React SPA)       │
+│                                     │
+│  React Router  →  Pages             │
+│  Redux Store   →  Auth State        │
+└──────────────┬──────────────────────┘
+               │ Appwrite SDK
+               ▼
+┌─────────────────────────────────────┐
+│           Appwrite Cloud            │
+│                                     │
+│  Auth      →  Login, OAuth, Email   │
+│  Database  →  Blog Post CRUD        │
+│  Storage   →  Image Uploads         │
+└─────────────────────────────────────┘
+```
+
 ## 📁 Project Structure
 
 ```
